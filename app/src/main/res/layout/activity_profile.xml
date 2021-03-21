@@ -76,7 +76,7 @@
         android:layout_marginLeft="20dp"
         app:layout_constraintTop_toBottomOf="@id/referensi"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Bila ada referensi akan saya letakan pada notepad."
+        android:text="https://www.youtube.com/watch?v=r7B9S3S1xPI\n\nhttps://www.youtube.com/watch?v=kf2fxYLOiSo&amp;t=329s"
         android:textColor="@color/thblack"
         android:textSize="15dp"
         />

@@ -23,10 +23,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.nio.file.Path;
 import java.util.LinkedList;
 
 public class LaguActivity extends AppCompatActivity {
-    private final LinkedList<String> mDaftarLagu = new LinkedList<>();
+    static LinkedList<String> mDaftarLagu = new LinkedList<>();
+    static LinkedList<String> mPathLagu = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private LaguAdapter mAdapter;
 
@@ -80,7 +82,7 @@ public class LaguActivity extends AppCompatActivity {
 
         }else{
             getMusic();
-
+            Log.e("test", mDaftarLagu.getLast());
             mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
             mAdapter = new LaguAdapter(this, mDaftarLagu);
             mRecyclerView.setAdapter(mAdapter);
@@ -93,16 +95,17 @@ public class LaguActivity extends AppCompatActivity {
     public void getMusic(){
         ContentResolver contentResolver = getContentResolver();
         Uri songuri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor song = contentResolver.query(songuri, null, null, null, null);
+        String[] projection = {MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.TITLE ,MediaStore.Audio.Media.ALBUM, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION};
+        Cursor song = contentResolver.query(songuri, projection, null,null, null);
 
         if(song != null && song.moveToFirst()){
-            int songTitle = song.getColumnIndex(MediaStore.Audio.Media.TITLE);
-            int songArtist = song.getColumnIndex(MediaStore.Audio.Media.ARTIST);
 
             do{
-                String currTitle = song.getString(songTitle);
+                String currTitle = song.getString(1);
+                String path = song.getString(0);
                 mDaftarLagu.add(currTitle);
-                Log.e("myTag", currTitle);
+                mPathLagu.add(path);
+                Log.e("tag", mPathLagu.getLast());
             }while (song.moveToNext());
 
 

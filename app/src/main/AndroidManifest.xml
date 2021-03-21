@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="umn.ac.id">
-    
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,15 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UTS">
-        <activity android:name=".LaguActivity"
-            android:label="Song List">
+        <activity android:name=".PlayerActivity"
+            android:label="Now Playing">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PlayerActivity"/>
         </activity>
+        <activity
+            android:name=".LaguActivity"
+            android:label="Song List"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="Login Page">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ProfileActivity" />
+                android:value=".LoginActivity" />
         </activity>
         <activity
             android:name=".ProfileActivity"
