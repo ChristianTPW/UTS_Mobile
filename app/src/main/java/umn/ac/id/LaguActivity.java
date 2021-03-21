@@ -5,6 +5,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.ContentResolver;
@@ -25,6 +27,8 @@ import java.util.LinkedList;
 
 public class LaguActivity extends AppCompatActivity {
     private final LinkedList<String> mDaftarLagu = new LinkedList<>();
+    private RecyclerView mRecyclerView;
+    private LaguAdapter mAdapter;
 
     private static final int PERMISSION_REQ = 1;
 
@@ -76,9 +80,12 @@ public class LaguActivity extends AppCompatActivity {
 
         }else{
             getMusic();
+
+            mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+            mAdapter = new LaguAdapter(this, mDaftarLagu);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         }
-
-
 
 
     }
@@ -97,6 +104,8 @@ public class LaguActivity extends AppCompatActivity {
                 mDaftarLagu.add(currTitle);
                 Log.e("myTag", currTitle);
             }while (song.moveToNext());
+
+
         }
 
     }
